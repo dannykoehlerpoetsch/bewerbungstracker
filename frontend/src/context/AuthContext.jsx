@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(false);
         toast.success("Erfolgreich ausgeloggt!");
         setUser(null); // Benutzer-Informationen beim Logout löschen
-
+        navigate("/");
         window.location.reload();
       }
     } catch (error) {
