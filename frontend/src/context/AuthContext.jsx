@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await api.post("/user/logout");
       if (response.status === 200) {
-        Cookies.remove("jwt");
+        Cookies.remove("jwt", { path: "/" });
         Cookies.remove("jwt1");
         setIsAuthenticated(false);
         toast.success("Erfolgreich ausgeloggt!");
