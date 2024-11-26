@@ -59,8 +59,7 @@ export async function login(req, res) {
       .cookie("jwt", token, {
         httpOnly: true,
         sameSite: "lax",
-        domain: "localhost",
-        secure: false, // muss in der Entwicklung false sein, in der produktion true
+        secure: true, // muss in der Entwicklung false sein, in der produktion true
         path: "/", // Cookie auf allen Unterseiten zugänglich machen
         maxAge: 60 * 60 * 1000, // 1h
       })
