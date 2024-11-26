@@ -78,7 +78,7 @@ export async function logout(req, res) {
   try {
     res.clearCookie("jwt", {
       httpOnly: true,
-      sameSite: "strict",
+      sameSite: "none",
     });
     res.status(200).json({ msg: "Logout erfolgreich" });
   } catch (error) {
