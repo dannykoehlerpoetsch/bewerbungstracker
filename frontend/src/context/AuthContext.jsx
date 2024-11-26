@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
         toast.success("Erfolgreich eingeloggt!");
         setUser(response.data.user); // Benutzer nach erfolgreichem Login setzen
-        Cookies.set("jwt", response.data.token);
+        Cookies.set("jwt1", response.data.token);
         navigate("/applications", { replace: true });
       }
     } catch (error) {
