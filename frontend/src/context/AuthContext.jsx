@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Erfolgreich ausgeloggt!");
         setUser(null); // Benutzer-Informationen beim Logout löschen
 
-        navigate("/", { replace: true });
+        window.location.reload();
       }
     } catch (error) {
       console.log("Fehler beim Logout:", error);
