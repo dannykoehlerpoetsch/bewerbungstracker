@@ -93,8 +93,6 @@ body {
   text-align: center;
   color: white;
   font-style: italic;
-  position: absolute;
-  bottom: 0;
 }
 
 .heading {
@@ -282,6 +280,7 @@ body {
 .logout {
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .login-form {
