@@ -1,0 +1,156 @@
+.applicationListWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+.today {
+  color: gold;
+}
+.tableWrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  min-width: 700px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+.table th {
+  background-color: #343535;
+  color: gold;
+}
+
+.tableBody td {
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: black;
+}
+
+.tableBody .statusGreen {
+  background-color: darkgreen;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusRed {
+  background-color: red;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusBlue {
+  background-color: blue;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusDefault {
+  background-color: gray;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.applicationListWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.tableWrapper {
+  overflow-x: auto; /* Ermöglicht horizontales Scrollen, wenn der Inhalt überläuft */
+  -webkit-overflow-scrolling: touch; /* Bessere Scroll-Erfahrung auf iOS-Geräten */
+  margin-top: 20px;
+  width: 100%; /* Sicherstellen, dass der Wrapper die volle Breite hat */
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed; /* Erzwingt eine feste Spaltenbreite */
+  min-width: 700px; /* Stellt sicher, dass die Tabelle mindestens 700px breit ist */
+  border-collapse: collapse; /* Zellen korrekt zusammenführen */
+}
+
+.table th,
+.table td {
+  padding: 12px;
+  text-align: left;
+  word-wrap: break-word; /* Zeilenumbruch in langen Wörtern erzwingen */
+}
+
+.table th {
+  background-color: #343535;
+  color: white;
+}
+
+.tableBody td {
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+  color: black;
+}
+
+.tableBody .statusGreen {
+  background-color: darkgreen;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusRed {
+  background-color: red;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusBlue {
+  background-color: blue;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+
+.tableBody .statusDefault {
+  background-color: gray;
+  color: white;
+  padding: 0.2rem;
+  font-weight: bold;
+}
+.table th:nth-child(1),
+.table td:nth-child(1) {
+  width: 50px;
+  text-align: center;
+}
+
+.table th:nth-child(2),
+.table td:nth-child(2) {
+  width: 110px;
+  text-align: center;
+}
+
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  width: 75px;
+  text-align: center;
+}

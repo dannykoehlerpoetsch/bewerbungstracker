@@ -1,8 +1,9 @@
 import { useState, useContext } from "react";
-import { ApplicationContext } from "../context/ApplicationContext";
-import api from "../utils/api"; // Importiere die konfigurierte Axios-Instanz
-import { useAuth } from "../context/AuthContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
+import api from "../../utils/api";
+import { useAuth } from "../../context/AuthContext";
 import { toast } from "react-toastify";
+import styles from "./AddApplication.module.css";
 
 const AddApplication = () => {
   const { isAuthenticated } = useAuth();
@@ -29,7 +30,6 @@ const AddApplication = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Verwende die instanziierte `api` von api.js
       const res = await api.post("/bewerbungen", formData);
 
       if (res.status === 201) {
@@ -44,33 +44,29 @@ const AddApplication = () => {
           comments: "",
           contact: "",
         });
-        fetchApplications(); // Bewerbungen neu abrufen
+        fetchApplications();
       } else {
         throw new Error("Fehler beim Hinzufügen der Bewerbung");
       }
     } catch (err) {
       if (err.response && err.response.data.errors) {
-        // Fehlerbehandlung - Setze die Fehler im State
         const backendErrors = err.response.data.errors.reduce((acc, curr) => {
           acc[curr.field] = curr.message;
           return acc;
         }, {});
         setErrors(backendErrors);
       } else {
-        console.error("Fehler beim Senden der Bewerbung:", err);
+        toast.error("Fehler beim Senden der Bewerbung:", err);
       }
     }
   };
 
   return (
-    <>
-      <h2 className="addAppHeading">Neue Bewerbung hinzufügen</h2>
-      <p className="application-count">
-        Bisher erfasste Bewerbungen: <span>{applications.length}</span>
-      </p>
+    <section className={styles.addWrapper}>
+      <h2>Neue Bewerbung hinzufügen</h2>
 
-      <form onSubmit={handleSubmit} className="application-form">
-        <div className="formdata">
+      <form onSubmit={handleSubmit} className={styles.applicationForm}>
+        <div className={styles.formdata}>
           <label>
             Datum:
             {errors.date && <p>{errors.date}</p>}
@@ -165,7 +161,7 @@ const AddApplication = () => {
         </div>
         <button type="submit">Hinzufügen</button>
       </form>
-    </>
+    </section>
   );
 };
 

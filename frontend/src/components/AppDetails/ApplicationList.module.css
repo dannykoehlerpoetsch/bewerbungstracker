@@ -1,0 +1,133 @@
+/* Allgemeines Layout */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Karte für jede Bewerbung */
+.applicationCard {
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 80%;
+  box-shadow: 0 0 10px rgb(0, 204, 204);
+
+  p {
+    margin: 1.5rem 0.5rem;
+    width: 80%;
+    strong {
+      margin: 0.5em 0.5em 0.5em 0;
+      color: gold;
+    }
+  }
+}
+
+.applicationCard:hover {
+  transform: translateY(-2px);
+}
+
+/* Statusanzeige */
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.4rem;
+  color: white;
+  text-transform: capitalize;
+}
+
+/* Farben für verschiedene Status */
+
+/* Bearbeitbare Eingabeelemente */
+.select {
+  width: 20%;
+  padding: 0.25rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+
+  font-size: 0.9rem;
+  transition: border-color 0.3s ease;
+}
+
+.select:focus,
+textarea:focus {
+  border-color: rgb(0, 204, 204);
+  outline: none;
+}
+
+.textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  font-size: 1rem;
+  resize: none;
+  transition: border-color 0.3s ease;
+}
+
+/* Aktionen: Bearbeiten, Speichern, Löschen */
+.actionButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.actionButton:active {
+  transform: scale(0.95);
+}
+.saveButton,
+.editButton,
+.deleteButton {
+  background-color: transparent;
+  padding: 0.2rem;
+}
+/* Individuelle Farben für Buttons */
+.actionButton.edit:hover {
+  background-color: #cce5ff;
+}
+
+.actionButton.delete:hover {
+  background-color: #f8d7da;
+}
+
+/* Responsivität */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .applicationCard {
+    padding: 15px;
+    width: 90%;
+  }
+
+  p {
+    margin: 8px 0;
+  }
+
+  .select {
+    width: 100%;
+  }
+  .textarea {
+    font-size: 0.9rem;
+  }
+}

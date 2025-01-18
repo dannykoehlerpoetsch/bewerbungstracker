@@ -51,18 +51,23 @@ pdfRouter.get("/download-pdf", authenticateToken, async (req, res) => {
     // Füge danach einen Zeilenumbruch hinzu
     yPosition += 30; // Abstand zur nächsten Zeile
 
-    doc.moveDown(1);
-
     // Start Y-Position
     yPosition = doc.y;
 
     // Bewerbungsdaten hinzufügen
     doc.fontSize(10);
+
     applications.forEach((app) => {
       const date = app.date ? new Date(app.date).toLocaleDateString() : "N/A";
       const company = app.companyName || "N/A";
       const jobTitle = app.jobTitle || "N/A";
       const status = app.status || "N/A";
+
+      // Überprüfen, ob genug Platz auf der aktuellen Seite ist
+      if (yPosition + 35 > doc.page.height - 50) {
+        doc.addPage(); // Wenn nicht, füge eine neue Seite hinzu
+        yPosition = 50; // Setze y-Position zurück, um den Inhalt oben auf der neuen Seite zu beginnen
+      }
 
       // Datum, Firma und Jobtitel nebeneinander in der Mitte, Status ganz rechts
       doc.text(date, 20, yPosition, { width: 120, align: "left" }); // Datum
