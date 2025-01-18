@@ -1,76 +1,58 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { ApplicationContext } from "../../context/ApplicationContext";
-import FilterSortPanel from "../FilterSortPanel/FilterSortPanel";
+import style from "./ApplicationListed.module.css"; // CSS-Module importieren
 import DownloadButton from "../DownloadButton";
 import { useAuth } from "../../context/AuthContext";
 
 export default function ApplicationListed() {
   const { isAuthenticated } = useAuth();
-  const { applications, searchTerm, setSearchTerm } =
-    useContext(ApplicationContext);
+  const { applications } = useContext(ApplicationContext);
+
   const getStatusColor = (status) => {
     switch (status) {
       case "Offen":
-        return "darkgreen";
+        return style.statusGreen;
       case "Absage":
-        return "red";
+        return style.statusRed;
       case "In Bearbeitung":
-        return "blue";
+        return style.statusBlue;
       default:
-        return "white";
+        return style.statusDefault;
     }
   };
 
   const today = new Date().toLocaleDateString("de-DE");
-  return (
-    <div className="applicationList-wrapper">
-      <p className="application-count">
-        Bisher erfasste Bewerbungen: <span>{applications.length}</span>
-      </p>
-      <FilterSortPanel />
-      <input
-        type="text"
-        placeholder="Unternehmen suchen..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="searchbar"
-      />
-      <DownloadButton />
-      <p className="today">Heute ist der {today}</p>
-      <table className="table">
-        <thead className="tableHead">
-          <tr>
-            <th>Nr.</th>
-            <th>Datum</th>
-            <th>Unternehmen</th>
-            <th>Status</th>
-            <th>Ansprechpartner</th>
-            <th>Kommentar</th>
-          </tr>
-        </thead>
-        <tbody className="tableBody">
-          {applications.map((app, index) => (
-            <tr key={app._id}>
-              <td>{index + 1}</td>
-              <td>{new Date(app.date).toLocaleDateString()}</td>
-              <td>{app.companyName}</td>
-              <td
-                style={{
-                  backgroundColor: getStatusColor(app.status),
-                  color: "white",
-                  padding: "0.2rem",
-                  textAlign: "center",
-                }}
-              >
-                {app.status}
-              </td>
-              <td>{app.contact}</td>
 
-              <td>{app.comments}</td>
+  return (
+    <section className={style.applicationListWrapper}>
+      <DownloadButton />
+      <p className={style.today}>Heute ist der {today}</p>
+      <div className={style.tableWrapper}>
+        <table className={style.table}>
+          <thead className={style.tableHead}>
+            <tr>
+              <th>Nr.</th>
+              <th>Datum</th>
+              <th>Unternehmen</th>
+              <th>Status</th>
+              <th>Ansprechpartner</th>
+              <th>Kommentar</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody className={style.tableBody}>
+            {applications.map((app, index) => (
+              <tr key={app._id}>
+                <td>{index + 1}</td>
+                <td>{new Date(app.date).toLocaleDateString()}</td>
+                <td>{app.companyName}</td>
+                <td className={getStatusColor(app.status)}>{app.status}</td>
+                <td>{app.contact}</td>
+                <td>{app.comments}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }

@@ -91,40 +91,39 @@
   outline: none;
 }
 
-/* Responsive Design: Wenn der Bildschirm kleiner ist als 768px */
 @media (max-width: 768px) {
   .container {
-    flex-direction: column; /* Ändert alles zu einer Spalte */
-    align-items: stretch; /* Streckt die Elemente über die gesamte Breite */
+    flex-direction: column;
+    align-items: stretch;
   }
 
   .line {
-    flex-direction: column; /* Ändert die Ausrichtung zu vertikal */
+    flex-direction: column;
     align-items: stretch;
   }
 
   .filterGroup,
   .sortGroup,
   .iconGroup {
-    width: 100%; /* Volle Breite für jede Gruppe */
-    margin-bottom: 15px; /* Abstand zwischen den Gruppen */
+    width: 100%;
+    margin-bottom: 15px;
   }
 
   .searchWrapper {
-    margin-top: 15px; /* Abstand zur oberen Gruppe */
-    width: 100%; /* Volle Breite */
+    margin-top: 15px;
+    width: 100%;
   }
 
   .label {
-    margin-bottom: 5px; /* Abstand unterhalb des Labels */
+    margin-bottom: 5px;
   }
 
   .select,
   .searchbar {
-    width: 100%; /* Volle Breite für Dropdowns und Suchleiste */
+    width: 100%;
   }
 
   .sortButton {
-    align-self: center; /* Zentriert den Button bei Bedarf */
+    align-self: center;
   }
 }

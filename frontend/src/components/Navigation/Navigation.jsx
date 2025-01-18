@@ -13,7 +13,7 @@ import {
 } from "@phosphor-icons/react";
 
 export default function Navigation() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, user } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -33,7 +33,9 @@ export default function Navigation() {
               title="Profil"
             >
               {isAuthenticated ? (
-                <UserCircleCheck size={40} color="gold" />
+                <>
+                  <UserCircleCheck size={40} color="gold" />
+                </>
               ) : (
                 <UserCircle size={40} color="gold" />
               )}

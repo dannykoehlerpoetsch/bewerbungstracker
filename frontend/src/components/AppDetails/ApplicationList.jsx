@@ -1,13 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ApplicationContext } from "../../context/ApplicationContext";
-
+import { PencilSimple, Check, Trash } from "@phosphor-icons/react";
 import api from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
+import styles from "./ApplicationList.module.css";
+import DownloadButton from "../DownloadButton";
 
 const ApplicationList = () => {
   const { isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(true);
+  const [editMode, setEditMode] = useState({}); // Verfolgt den Bearbeitungsmodus
+  const [editedData, setEditedData] = useState({}); // Speichert Änderungen
+
   const {
     applications,
     fetchApplications,
@@ -15,7 +20,6 @@ const ApplicationList = () => {
     sortField,
     sortOrder,
     searchTerm,
-    setSearchTerm,
   } = useContext(ApplicationContext);
 
   const getStatusColor = (status) => {
@@ -31,37 +35,46 @@ const ApplicationList = () => {
     }
   };
 
-  const handleStatusChange = async (id, newStatus) => {
+  const toggleEditMode = (id) => {
+    setEditMode((prev) => ({ ...prev, [id]: !prev[id] }));
+    setEditedData((prev) => ({
+      ...prev,
+      [id]: applications.find((app) => app._id === id),
+    }));
+  };
+
+  const handleSave = async (id) => {
     try {
-      // Verwende die instanziierte `api` von api.js
-      await api.put(`/bewerbungen/${id}`, {
-        status: newStatus,
-      });
-      fetchApplications(); // Bewerbungen neu abrufen
+      const { status, comments } = editedData[id];
+      await api.put(`/bewerbungen/${id}`, { status, comments });
+      fetchApplications();
+      setEditMode((prev) => ({ ...prev, [id]: false }));
     } catch (err) {
-      console.error("Fehler beim Ändern des Status:", err);
+      console.error("Fehler beim Speichern:", err);
     }
+  };
+
+  const handleInputChange = (id, field, value) => {
+    setEditedData((prev) => ({
+      ...prev,
+      [id]: { ...prev[id], [field]: value },
+    }));
   };
 
   const handleDelete = async (id) => {
-    try {
-      // Verwende die instanziierte `api` von api.js
-      await api.delete(`/bewerbungen/${id}`);
-      fetchApplications(); // Bewerbungen neu abrufen
-    } catch (err) {
-      console.error("Fehler beim Löschen der Bewerbung:", err);
-    }
-  };
+    const confirmed = window.confirm(
+      "Möchten Sie diese Bewerbung wirklich löschen? Dieser Vorgang kann nicht rückgängig gemacht werden."
+    );
 
-  const handleCommentChange = async (id, newComment) => {
+    if (!confirmed) {
+      return;
+    }
+
     try {
-      // Verwende die instanziierte `api` von api.js
-      await api.put(`/bewerbungen/${id}`, {
-        comments: newComment,
-      });
-      fetchApplications(); // Bewerbungen neu abrufen
+      await api.delete(`/bewerbungen/${id}`);
+      fetchApplications();
     } catch (err) {
-      console.error("Fehler beim Ändern des Kommentars:", err);
+      console.error("Fehler beim Löschen:", err);
     }
   };
 
@@ -74,61 +87,99 @@ const ApplicationList = () => {
   }
 
   return (
-    <div className="applicationList-wrapper">
+    <section className={styles.wrapper}>
+      <DownloadButton />
       {applications.length > 0 ? (
         applications.map((app) => (
-          <div key={app._id} className="application-list">
+          <div key={app._id} className={styles.applicationCard}>
             <p>
-              <strong>Datum:</strong> {new Date(app.date).toLocaleDateString()}
+              <strong>Datum: </strong> {new Date(app.date).toLocaleDateString()}
             </p>
             <p>
-              <strong>Unternehmen:</strong> {app.companyName}
+              <strong>Unternehmen: </strong> {app.companyName}
             </p>
             <p>
-              <strong>Ansprechpartner:</strong> {app.contact}
+              <strong>Ansprechpartner: </strong> {app.contact}
             </p>
             <p>
-              <strong>Jobtitel:</strong> {app.jobTitle}
+              <strong>Jobtitel: </strong> {app.jobTitle}
             </p>
             <p>
-              <strong>Gefunden bei:</strong> {app.foundAt}
+              <strong>Gefunden bei: </strong> {app.foundAt}
             </p>
             <p>
-              <strong>Beworben über:</strong> {app.appliedVia}
+              <strong>Beworben über: </strong> {app.appliedVia}
             </p>
             <p>
               <strong>Status:</strong>
-              <select
-                style={{
-                  backgroundColor: getStatusColor(app.status),
-                  color: "white",
-                  padding: "0.2rem",
-                }}
-                value={app.status}
-                onChange={(e) => handleStatusChange(app._id, e.target.value)}
-              >
-                <option value="Offen">Offen</option>
-                <option value="Absage">Absage</option>
-                <option value="In Bearbeitung">In Bearbeitung</option>
-              </select>
+              {editMode[app._id] ? (
+                <select
+                  className={styles.select}
+                  value={editedData[app._id]?.status || app.status}
+                  onChange={(e) =>
+                    handleInputChange(app._id, "status", e.target.value)
+                  }
+                >
+                  <option value="Offen">Offen</option>
+                  <option value="Absage">Absage</option>
+                  <option value="In Bearbeitung">In Bearbeitung</option>
+                </select>
+              ) : (
+                <span
+                  className={styles.status}
+                  style={{ backgroundColor: getStatusColor(app.status) }}
+                >
+                  {app.status}
+                </span>
+              )}
             </p>
-            <p className="application-comment">
+            <p>
               <strong>Kommentare:</strong>
-              <textarea
-                type="text"
-                rows={5}
-                value={app.comments}
-                onChange={(e) => handleCommentChange(app._id, e.target.value)}
-                placeholder="Kommentare..."
-              />
+              {editMode[app._id] ? (
+                <textarea
+                  className={styles.textarea}
+                  rows={5}
+                  value={editedData[app._id]?.comments || app.comments}
+                  onChange={(e) =>
+                    handleInputChange(app._id, "comments", e.target.value)
+                  }
+                />
+              ) : (
+                <span>{app.comments}</span>
+              )}
             </p>
-            <button onClick={() => handleDelete(app._id)}>Löschen</button>
+            <div className={styles.actionButtons}>
+              {editMode[app._id] ? (
+                <button
+                  className={styles.saveButton}
+                  onClick={() => handleSave(app._id)}
+                  title="Speichern"
+                >
+                  <Check size={18} color="#41fb28" />
+                </button>
+              ) : (
+                <button
+                  className={styles.editButton}
+                  onClick={() => toggleEditMode(app._id)}
+                  title="Bearbeiten"
+                >
+                  <PencilSimple size={18} color="white" />
+                </button>
+              )}
+              <button
+                className={styles.deleteButton}
+                onClick={() => handleDelete(app._id)}
+                title="Löschen"
+              >
+                <Trash size={20} color="crimson" />
+              </button>
+            </div>
           </div>
         ))
       ) : (
         <p>Keine Bewerbungen gefunden.</p>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -6,6 +6,7 @@ import Register from "../../components/Register/Register";
 import AddApplication from "../AddApplication/AddApplication";
 import DetailsOrList from "../ViewApplication/DetailsOrList";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import BackToTop from "../../components/BackToTop/BackToTop";
 import styles from "./Main.module.css";
 
 export default function Main() {
@@ -32,6 +33,7 @@ export default function Main() {
           }
         />
       </Routes>
+      <BackToTop />
     </main>
   );
 }

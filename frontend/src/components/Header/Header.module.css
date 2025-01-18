@@ -29,7 +29,15 @@
   justify-self: center;
 }
 
-.heading_content {
-  font-size: 2rem;
-  color: gold;
+.headerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .username {
+    display: none;
+  }
 }
