@@ -1,0 +1,82 @@
+.addWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.applicationForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2em auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgb(0, 204, 204);
+}
+
+.formdata {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.applicationForm label {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.applicationForm input,
+.applicationForm select {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin: 5px 0;
+
+  &:focus {
+    outline: 1px solid #00cccc;
+    box-shadow: 0 0 5px #00cccc;
+  }
+}
+
+.applicationForm button {
+  padding: 1rem 2rem;
+  margin: 0.5rem;
+  background-color: #00cccc;
+  color: #003344;
+  border: none;
+  border-radius: 0.5rem;
+  outline: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  transition: 0.3s linear;
+
+  &:hover {
+    background-color: #7ccae4;
+  }
+}
+
+@media (max-width: 768px) {
+  .applicationForm {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .applicationForm label {
+    width: 100%;
+  }
+
+  .applicationForm input,
+  .applicationForm select {
+    width: 100%;
+  }
+}
