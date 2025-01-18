@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
-import { ApplicationContext } from "../context/ApplicationContext";
-import FilterSortPanel from "./FilterSortPanel";
-import DownloadButton from "./DownloadButton";
-import { useAuth } from "../context/AuthContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
+import FilterSortPanel from "../FilterSortPanel";
+import DownloadButton from "../DownloadButton";
+import { useAuth } from "../../context/AuthContext";
 
 export default function ApplicationListed() {
   const { isAuthenticated } = useAuth();

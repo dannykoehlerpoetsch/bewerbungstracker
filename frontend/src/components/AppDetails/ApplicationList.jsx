@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { ApplicationContext } from "../context/ApplicationContext";
-import FilterSortPanel from "./FilterSortPanel";
-import api from "../utils/api"; // Importiere die konfigurierte Axios-Instanz
-import { useAuth } from "../context/AuthContext";
+import { ApplicationContext } from "../../context/ApplicationContext";
+import FilterSortPanel from "../FilterSortPanel";
+import api from "../../utils/api";
+import { useAuth } from "../../context/AuthContext";
 
 const ApplicationList = () => {
   const { isAuthenticated } = useAuth();

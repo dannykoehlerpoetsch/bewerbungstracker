@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import ApplicationList from "./ApplicationList";
-import ApplicationListed from "./ApplicationListed";
+import ApplicationList from "../../components/AppDetails/ApplicationList";
+import ApplicationListed from "../../components/AppList/ApplicationListed";
 
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../../context/AuthContext";
 
 export default function DetailsOrList({ applications, refreshApplications }) {
   const { isAuthenticated } = useAuth();
