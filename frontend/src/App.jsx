@@ -13,12 +13,12 @@ function App() {
   const { user } = useAuth();
 
   return (
-    <>
+    <div className="app-wrapper">
       <ToastContainer />
       <Header />
       <Main />
       <Footer />
-    </>
+    </div>
   );
 }
 

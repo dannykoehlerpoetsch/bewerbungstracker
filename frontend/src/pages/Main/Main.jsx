@@ -6,10 +6,11 @@ import Register from "../../components/Register/Register";
 import AddApplication from "../AddApplication/AddApplication";
 import DetailsOrList from "../ViewApplication/DetailsOrList";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import styles from "./Main.module.css";
 
 export default function Main() {
   return (
-    <main>
+    <main className={styles.main}>
       Main
       <Routes>
         <Route index element={<Home />} />

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Home() {
   return (
-    <div className="home-container container">
+    <div className="home-container ">
       <h2 className="home-header">
         Behalte den Überblick über deine Bewerbungen
       </h2>
