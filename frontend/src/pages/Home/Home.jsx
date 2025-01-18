@@ -1,34 +1,41 @@
 import React from "react";
+import styles from "./Home.module.css";
 
 export default function Home() {
   return (
-    <div className="home-container ">
-      <h2 className="home-header">
-        Behalte den Überblick über deine Bewerbungen
-      </h2>
-      <p className="home-content">
-        Willkommen bei deinem persönlichen Bewerbungstracker! Verwalte alle
-        deine Bewerbungen an einem Ort: Von Status-Updates bis hin zu Notizen
-        über Gespräche – du hast alles im Griff. Filtere und sortiere deine
-        Einträge nach deinen Bedürfnissen und exportiere sie als übersichtliche
-        PDF, um deine Fortschritte immer im Blick zu behalten.
-      </p>
-      <p className="home-action">
-        Starte jetzt und mach das Bewerben effizienter und stressfreier!
-      </p>
+    <section className={styles.homeContainer}>
+      <article>
+        <h2 className={styles.welcome}>Willkommen!</h2>
+        <h3 className={styles.homeHeader}>
+          Hier ist dein persönlicher Bewerbungstracker!
+        </h3>
+        <p className={styles.homeContent}>
+          {" "}
+          <strong>
+            Vergiss die unübersichtliche Excel-Tabelle – verwalte deine
+            Bewerbungen digital!
+          </strong>{" "}
+          <br />
+          Behalte jederzeit den Überblick über deine Bewerbungen: Wo hast du
+          dich beworben? Wer sind deine Ansprechpartner? Welche Bewerbungen sind
+          noch offen? Notiere Gesprächsdetails, Termine und wichtige Kommentare
+          direkt in deinem Bewerbungsprofil. Exportiere deinen Fortschritt als
+          PDF und teile ihn ganz einfach mit anderen – strukturiert und
+          professionell.
+        </p>
+        <p className={styles.homeAction}>
+          Starte jetzt und mach das Bewerben effizienter und stressfreier!
+        </p>
+      </article>
 
-      <div className="note">
+      <article className={styles.note}>
         <p>
           Diese Anwendung wurde für die Nutzung auf Desktop-Browsern,
           insbesondere Google Chrome, optimiert. Die Darstellung und
           Funktionalität auf mobilen Geräten (Tablets/Smartphones) ist
           möglicherweise eingeschränkt.
         </p>
-        <p>
-          Mobile Optimierung ist in Arbeit. Wir danken Ihnen für Ihr
-          Verständnis!
-        </p>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

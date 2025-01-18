@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
+import styles from "../Register/Form.module.css";
 
 const Login = () => {
   const { login } = useAuth();
@@ -7,7 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const [error, setError] = useState("");
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
@@ -18,60 +20,64 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Verwendung der login-Funktion aus dem AuthContext
       await login(formData.email, formData.password);
     } catch (err) {
-      setError("Fehler beim Login. Überprüfe deine Anmeldedaten.");
       toast.error("Fehler beim Login. Überprüfe deine Anmeldedaten.");
     }
   };
 
+  const isFormValid = formData.email && formData.password;
+
   return (
-    <div className="login-form">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>
-            E-Mail:
+    <section className={styles.container}>
+      <div className={styles.form}>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label htmlFor="email">E-Mail:</label>
             <input
               type="email"
+              id="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
               required
             />
-          </label>
-        </div>
-        <div className="input-wrapper">
-          <label>
-            Passwort:
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="password-input"
-            />
-            <i
-              className="password-toggle"
-              title="Passwort anzeigen / verbergen"
-              onClick={() => {
-                setShowPassword((prevState) => !prevState);
-              }}
-            >
-              {" "}
-              {showPassword ? "🔏" : "👀"}
-            </i>
-          </label>
-        </div>
+          </div>
+          <div className={styles.formGroup}>
+            <label htmlFor="password">Passwort:</label>
+            <div className={styles.passwordWrapper}>
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword(!showPassword)}
+                title={
+                  showPassword ? "Passwort verbergen" : "Passwort anzeigen"
+                }
+              >
+                {showPassword ? "🔒" : "👁"}
+              </button>
+            </div>
+          </div>
 
-        {error && <p className="error">{error}</p>}
-        <button type="submit" className="login-btn">
-          Einloggen
-        </button>
-      </form>
-    </div>
+          <button
+            type="submit"
+            className={styles.submitButton}
+            disabled={!isFormValid}
+          >
+            Einloggen
+          </button>
+        </form>
+      </div>
+    </section>
   );
 };
 

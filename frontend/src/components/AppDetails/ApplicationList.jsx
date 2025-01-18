@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { ApplicationContext } from "../../context/ApplicationContext";
-import FilterSortPanel from "../FilterSortPanel";
+
 import api from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
 
@@ -75,17 +75,6 @@ const ApplicationList = () => {
 
   return (
     <div className="applicationList-wrapper">
-      <p className="application-count">
-        Bisher erfasste Bewerbungen: <span>{applications.length}</span>
-      </p>
-      <FilterSortPanel />
-      <input
-        type="text"
-        placeholder="Unternehmen suchen..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="searchbar"
-      />
       {applications.length > 0 ? (
         applications.map((app) => (
           <div key={app._id} className="application-list">

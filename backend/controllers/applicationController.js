@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 export const getApplications = async (req, res) => {
   try {
     const { userId } = req;
-    console.log("req.userId:", req.userId);
+
     const {
       status,
       sortField = "date",
@@ -15,7 +15,7 @@ export const getApplications = async (req, res) => {
 
     // Basis-Filter erstellen und je nach `status` und `companyName` erweitern
     const filter = { owner: userId };
-    console.log("Filter:", filter);
+
     if (status) {
       filter.status = status;
     }

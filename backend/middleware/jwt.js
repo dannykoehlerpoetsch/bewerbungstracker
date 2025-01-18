@@ -12,7 +12,6 @@ const verifyToken = (token) => {
 
 export const authenticateToken = async (req, res, next) => {
   try {
-    console.log("Cookies:", req.cookies); // Debugging
     const token = req.cookies?.jwt;
 
     if (!token) {

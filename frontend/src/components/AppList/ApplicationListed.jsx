@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { ApplicationContext } from "../../context/ApplicationContext";
-import FilterSortPanel from "../FilterSortPanel";
+import FilterSortPanel from "../FilterSortPanel/FilterSortPanel";
 import DownloadButton from "../DownloadButton";
 import { useAuth } from "../../context/AuthContext";
 
