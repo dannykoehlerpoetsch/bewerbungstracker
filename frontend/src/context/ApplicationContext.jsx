@@ -15,10 +15,8 @@ export const ApplicationProvider = ({ children }) => {
   const fetchApplications = async () => {
     if (isAuthenticated) {
       try {
-        // Den Endpunkt /bewerbungen zur baseURL hinzufügen
-        const endpoint = "/bewerbungen"; // Endpunkt für Bewerbungen
+        const endpoint = "/bewerbungen";
 
-        // Query-Parameter erstellen
         const params = {
           status: filterStatus,
           sortField: sortField,
@@ -26,20 +24,16 @@ export const ApplicationProvider = ({ children }) => {
           companyName: searchTerm,
         };
 
-        // Anfrage an die API mit den Parametern senden
         const res = await api.get(endpoint, { params });
 
-        // Überprüfen, ob die Antwort eine Liste von Bewerbungen ist
         if (Array.isArray(res.data)) {
-          setApplications(res.data); // Die Bewerbungen ins State setzen
+          setApplications(res.data);
         } else {
           console.error("Erwartete Datenstruktur nicht erhalten:", res.data);
         }
       } catch (err) {
-        console.error("Fehler beim Laden der Bewerbungen:", err);
+        return;
       }
-    } else {
-      console.log("Erst einloggen");
     }
   };
 

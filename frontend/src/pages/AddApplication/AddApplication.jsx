@@ -56,17 +56,14 @@ const AddApplication = () => {
         }, {});
         setErrors(backendErrors);
       } else {
-        console.error("Fehler beim Senden der Bewerbung:", err);
+        toast.error("Fehler beim Senden der Bewerbung:", err);
       }
     }
   };
 
   return (
     <section className={styles.addWrapper}>
-      <h2 className="addAppHeading">Neue Bewerbung hinzufügen</h2>
-      <p className="application-count">
-        Bisher erfasste Bewerbungen: <span>{applications.length}</span>
-      </p>
+      <h2>Neue Bewerbung hinzufügen</h2>
 
       <form onSubmit={handleSubmit} className={styles.applicationForm}>
         <div className={styles.formdata}>

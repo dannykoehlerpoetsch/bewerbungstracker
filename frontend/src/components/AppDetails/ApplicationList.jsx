@@ -5,13 +5,14 @@ import api from "../../utils/api";
 import { useAuth } from "../../context/AuthContext";
 import styles from "./ApplicationList.module.css";
 import DownloadButton from "../DownloadButton";
+import { toast } from "react-toastify";
 
 const ApplicationList = () => {
   const { isAuthenticated } = useAuth();
 
   const [loading, setLoading] = useState(true);
-  const [editMode, setEditMode] = useState({}); // Verfolgt den Bearbeitungsmodus
-  const [editedData, setEditedData] = useState({}); // Speichert Änderungen
+  const [editMode, setEditMode] = useState({});
+  const [editedData, setEditedData] = useState({});
 
   const {
     applications,
@@ -46,11 +47,17 @@ const ApplicationList = () => {
   const handleSave = async (id) => {
     try {
       const { status, comments } = editedData[id];
-      await api.put(`/bewerbungen/${id}`, { status, comments });
-      fetchApplications();
-      setEditMode((prev) => ({ ...prev, [id]: false }));
+      const response = await api.put(`/bewerbungen/${id}`, {
+        status,
+        comments,
+      });
+      if (response.status === 200) {
+        toast.success("Bewerbung erfolgreich aktualisiert");
+        fetchApplications();
+        setEditMode((prev) => ({ ...prev, [id]: false }));
+      }
     } catch (err) {
-      console.error("Fehler beim Speichern:", err);
+      toast.error("Fehler beim Speichern:", err);
     }
   };
 
@@ -71,10 +78,13 @@ const ApplicationList = () => {
     }
 
     try {
-      await api.delete(`/bewerbungen/${id}`);
-      fetchApplications();
+      const response = await api.delete(`/bewerbungen/${id}`);
+      if (response.status === 200) {
+        toast.success("Bewerbung erfolgreich gelöscht");
+        fetchApplications();
+      }
     } catch (err) {
-      console.error("Fehler beim Löschen:", err);
+      toast.error("Fehler beim Löschen:", err);
     }
   };
 

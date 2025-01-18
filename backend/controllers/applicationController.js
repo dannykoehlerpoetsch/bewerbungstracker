@@ -29,7 +29,7 @@ export const getApplications = async (req, res) => {
     // Bewerbungen basierend auf Filter und Sortieroptionen abrufen
     const bewerbungen = await Bewerbung.find(filter).sort(sortOptions);
 
-    res.json(bewerbungen);
+    res.status(200).json(bewerbungen);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Serverfehler");
@@ -100,7 +100,7 @@ export const updateApplication = async (req, res) => {
         .json({ msg: "Bewerbung nicht gefunden oder keine Berechtigung" });
     }
 
-    res.json(updatedBewerbung);
+    res.status(200).json(updatedBewerbung);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Serverfehler");
@@ -116,7 +116,7 @@ export const deleteApplication = async (req, res) => {
     if (!bewerbung) {
       return res.status(404).json({ msg: "Bewerbung nicht gefunden" });
     }
-    res.json({ msg: "Bewerbung erfolgreich gelöscht" });
+    res.status(200).json({ msg: "Bewerbung erfolgreich gelöscht" });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Serverfehler");
