@@ -10,7 +10,6 @@ Kommentare sowie der aktuelle Status einer Bewerbung können in der Detailansich
 
 ## geplante Erweiterungen
 
-- responsive Layout
 - Nutzerauthentifizierung über Bestätigungs-E-Mail
 - Nutzerprofil bearbeiten (Name und Passwort ändern)
 - "Zugangsdaten vergessen?" Option
@@ -23,7 +22,7 @@ Kommentare sowie der aktuelle Status einer Bewerbung können in der Detailansich
 - React
   - Context-API, useState, useEffect, Axios, JS-Cookies
 - CSS
-  - externes CSS-Sheet (keine Modules, keine Frameworks)
+  - CSS Modules
 
 ### Backend
 
